@@ -4,30 +4,40 @@
 #include "pch.h"
 #include "framework.h"
 #include "HummingBird.h"
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
-#include <algorithm>
+
 
 namespace HB {
-    void DataFrames::transpose() {
-        // Swap index and colname values.
-        std::vector<std::string> indexTemp = index;
-        index = colName;
-        colName = indexTemp;
-        // Transpose the data
-        const std::vector<std::vector<std::string>> dataTemp = data;
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data[i].size(); j++) {
-                data[i][j] = dataTemp[j][i];
-            }
-        }
+    /**
+    * getData
+    * 
+    * Getter function to get the data body.
+    * 
+    * Parameters:
+    *     None
+    * 
+    * Returns:
+    *     (std::vector<std::vector<std::string>>) DataFrame's data body. It is a vector within a vector.
+    *                                             Can be indexed as data[row no.][col no.]
+    * 
+    * Throws:
+    *     None
+    */
+    std::vector<std::vector<std::string>> DataFrames::getData() { 
+        return data; 
     }
 
-    int DataFrames::get_col_index(std::string inputColName) {
+    /**
+    * getColIndex
+    * 
+    * Obtain the index of the column from all the column names by inputting the column name.
+    * 
+    * Parameters:
+    *     inputColName: (std::string) the desired column name.
+    * 
+    * Throws:
+    *     std::invalid_argument: throws when the inputted column name is not present in the data's column names.
+    */
+    int DataFrames::getColIndex(std::string inputColName) {
         int colIndex = -1;
         for (int i = 0; i < colName.size(); i++) {
             if (colName[i].compare(inputColName) == 0) {
@@ -39,7 +49,21 @@ namespace HB {
         return colIndex;
     }
 
-    int DataFrames::get_index_index(std::string inputIndexName) {
+    /**
+    * getIndexIndex
+    * 
+    * Obtains the index of the DataFrame's index using in inputted index name.
+    *
+    * Parameters:
+    *     inputIndexName: (std::string) input index name.
+    * 
+    * Returns:
+    *     (int) index
+    * 
+    * Throws:
+    *     std::invalid_argument: thrown when invalid index name is inputted.
+    */
+    int DataFrames::getIndexIndex(std::string inputIndexName) {
         int rowIndex = -1;
         for (int i = 0; i < index.size(); i++) {
             if (index[i].compare(inputIndexName) == 0) {
@@ -51,9 +75,24 @@ namespace HB {
         return rowIndex;
     }
 
-    DataFrames DataFrames::get_col(std::string inputColName) {
+    /**
+    * getColValues
+    * 
+    * Obtain the values contained within a column of the HB::DataFrame.
+    * 
+    * Parameters:
+    *     inputColName: (std::string) the input column name
+    * 
+    * Return:
+    *     (HB::DataFrames) DataFrame containing only the column
+    * 
+    * Throws:
+    *     std::invalid_argument: thrown when invalid index name is inputted.
+    *                            Thrown when DataFrames::getColName() is called within this function.
+    */
+    DataFrames DataFrames::getColValues(std::string inputColName) {
         try {
-            int colIndex = DataFrames::get_col_index(inputColName);
+            int colIndex = DataFrames::getColIndex(inputColName);
             std::vector<std::vector<std::string>> rowTemp;
             //        std::vector<std::string> colTemp;
             for (int i = 0; i < data.size(); i++) {
@@ -74,12 +113,71 @@ namespace HB {
         }
     }
 
-    std::string DataFrames::get_value(const std::string inputcolName, const std::string inputIndexName) {
+    /**
+    * getindexValues
+    * 
+    * Returns the DataFrame with values on the inputted row name:
+    * 
+    * Parameters:
+    *     inputIndexName: (std::string) index name.
+    * 
+    * Returns:
+    *     (HB::DataFrames) the index is the column names of the orignal DataFrame and the column name is the index name.
+    * 
+    * Throws:
+    *     std::invalid_argument: thrown when inputted name is not present in the DataFrames.
+    */
+    DataFrames DataFrames::getIndexValues(std::string inputIndexName) {
         try {
-            DataFrames df = DataFrames::get_col(inputcolName);
-            int indexIndex = DataFrames::get_index_index(inputIndexName);
+            int indexIndex = getIndexIndex(inputIndexName);
+            // initiate dataframes
+            DataFrames DB;
+            // create and set col
+            std::vector<std::string> colNameTemp;
+            colNameTemp.push_back(inputIndexName);
+            DB.set_colname(colNameTemp);
+            // create and set index
+            DB.set_index(colName);
+            // create and set data
+            std::vector<std::vector<std::string>> dataTemp;
+            for (size_t i = 0; i < data[indexIndex].size(); i++) {
+                std::vector <std::string> dataVec;
+                dataVec.push_back(data[indexIndex][i]);
+                dataTemp.push_back(dataVec);
+            }
+DB.set_data(dataTemp);
+return DB;
+        }
+        catch (std::invalid_argument& e) {
+            // Ouput the error message and return an empty DataFrames.
+            std::cout << e.what() << std::endl;
+            DataFrames DB;
+            return DB;
+        }
+    }
+
+    /**
+    * getValue
+    *
+    * Obtain the value (in std::string) in the dataFrame using index and column names.
+    *
+    * Parameters:
+    *     inputcolName: (std::string) input column name.
+    *     inputIndexName: (std::string) input index name.
+    *
+    * Return:
+    *     (std::string) a string cotaining the value
+    *
+    * Throws:
+    *     std::invalid_argument: thrown when invalid column name is inputted.
+    *     std::invalid_argument: thrown when invalid index name is inputted.
+    */
+    std::string DataFrames::getValue(const std::string inputcolName, const std::string inputIndexName) {
+        try {
+            DataFrames df = DataFrames::getColValues(inputcolName);
+            int indexIndex = DataFrames::getIndexIndex(inputIndexName);
             const int colIndex = 0;
-            return df.get_data()[indexIndex][colIndex];
+            return df.getData()[indexIndex][colIndex];
         }
         catch (const std::invalid_argument& e) {
             std::cout << "Invalid index name: " << inputIndexName << " " << e.what() << std::endl;
@@ -88,6 +186,20 @@ namespace HB {
         }
     }
 
+    /**
+    * display_colnames()
+    *
+    * Displays all the columns in the DataFrames.
+    *
+    * Parameters:
+    *     None
+    *
+    * Returns:
+    *    None
+    *
+    * Throws:
+    *     None
+    */
     void DataFrames::display_colnames() {
         std::cout << " "; // initial delimiters
         for (int i = 0; i < colName.size(); i++) {
@@ -109,11 +221,60 @@ namespace HB {
         }
     }
 
+    /**
+    * operator[]
+    *
+    * operator overload for indexing
+    *
+    * Parameters:
+    *     colName:(std::string) colName
+    *
+    * Returns:
+    *     DataFrame with the column name.
+    *
+    * Throws:
+    *     std::invalid_argument: Thrown when invalid index name is inputted.
+    *                            Thrown when DataFrames::getColValues() is called within this function.
+    */
+    DataFrames DataFrames::operator[](std::string colName) {
+        return getColValues(colName);
+    }
+
+    std::vector<std::string> DataFrames::colValueEqualTo(std::string colName, std::string inputValue) {
+        try {
+            std::vector<std::string> indexcontainingValues;
+            DataFrames colValues = getColValues(colName);
+            for (size_t i = 0; colValues.getIndex().size(); i++) {
+                if (colValues.getData()[i][0] == inputValue) {
+                    indexcontainingValues.push_back(colValues.getIndex()[i]);
+                }
+            }
+            return indexcontainingValues;
+        }
+        catch (std::invalid_argument& e) {
+            std::cout << e.what() << std::endl;
+            std::vector<std::string> indexcontainingValues;
+            return indexcontainingValues;
+        }
+    }
+
+    /**
+    * read_csv
+    * 
+    * function to parse through the csv file and create HummingBird DataFrame.
+    * 
+    * Parameters:
+    *     filePath: std::string of the filepath of the csv file.
+    *     colNameIndex: int representing the index column in the csv file. Default is set to 0.
+    *     indexRow: int representing the index row of the csv file. Default is set to 0.
+    * 
+    * Return:
+    *     HummingBird DataFrame structure
+    * 
+    * Throws:
+    *     None
+    */
     DataFrames read_csv(std::string filePath, int colNameIndex, int indexRow) {
-        /*
-         * This function opens and reads the csv file.
-         * */
-         // open csv file
         std::ifstream inputFile;
         inputFile.open(filePath);
 
