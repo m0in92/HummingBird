@@ -87,7 +87,7 @@ namespace HB {
     *     (HB::DataFrames) DataFrame containing only the column
     * 
     * Throws:
-    *     std::invalid_argument: thrown when invalid index name is inputted.
+    *     std::invalid_argument: thrown when invalid col name is inputted.
     *                            Thrown when DataFrames::getColName() is called within this function.
     */
     DataFrames DataFrames::getColValues(std::string inputColName) {
@@ -110,6 +110,7 @@ namespace HB {
         }
         catch (std::invalid_argument& e) {
             std::cout << e.what() << std::endl;
+            return create_empty_DataFrames();
         }
     }
 
@@ -256,6 +257,31 @@ return DB;
             std::vector<std::string> indexcontainingValues;
             return indexcontainingValues;
         }
+    }
+
+    /*
+    * create_empty_DataFrames
+    * 
+    * returns an empty DataFrame
+    * 
+    * Parameters:
+    *     None
+    * 
+    * Returns:
+    *     (DataFrames) an empty DataFrames
+    * 
+    * Throws:
+    *     None
+    */
+    DataFrames DataFrames::create_empty_DataFrames() {
+        std::vector<std::string> emptyIndex;
+        std::vector<std::string> emptyCol;
+        std::vector<std::vector<std::string>> emptyData;
+        DataFrames resDataFrames;
+        resDataFrames.set_data(emptyData);
+        resDataFrames.set_colname(emptyCol);
+        resDataFrames.set_index(emptyIndex);
+        return resDataFrames;
     }
 
     /**

@@ -40,6 +40,8 @@ namespace HB {
         DataFrames operator[](std::string colName);
         // Search functions
         std::vector<std::string> colValueEqualTo(std::string colName,std::string inputValue);
+        // Helper functions
+        DataFrames create_empty_DataFrames();
     private:
         std::vector<std::string> index;
         std::vector<std::string> colName;
