@@ -1,0 +1,42 @@
+\hypertarget{_humming_bird_8h_source}{}\doxysection{C\+:/dev/\+Humming\+Bird/\+Humming\+Bird/\+Humming\+Bird.h}
+\mbox{\hyperlink{_humming_bird_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_h_b}{HB}}\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Accessor\ Functions}}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a845a8fb35075a7ff21601b6553a57c8a}{get\_indexname}}()\ \{\ \textcolor{keywordflow}{return}\ index;\ \}}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a04332a847b67eef84ffd9769307ad8d1}{get\_colname}}()\ \{\ \textcolor{keywordflow}{return}\ colName;\ \}}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ \mbox{\hyperlink{class_h_b_1_1_data_frames_ac20a952e2840102e16c2b79e60eb2d50}{get\_data}}()\ \{\ \textcolor{keywordflow}{return}\ data;\ \}}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a3e821c7a4261321cf0eef92c91499daf}{get\_col\_index}}(std::string);}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a127e55fec61fa64d3f342b096ca72c05}{get\_index\_index}}(std::string);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_ab592f474c221d26e24f1fba36ec5f624}{get\_col}}(std::string);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a3a8fd340805799df3b55088f93452f6f}{get\_value}}(\textcolor{keyword}{const}\ std::string\ inputColName,\ \textcolor{keyword}{const}\ std::string\ inputIndexName);}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::vector<double>\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a51e27f15db90984090abf74c23c94434}{get\_col\_to\_double}}(std::string);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Modifier\ Functions}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a2cf345f3c2af96ecbbc2869c0d998e4e}{set\_index}}(std::vector<std::string>\ inputIndex)\ \{\ index\ =\ inputIndex;\ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a9729f6a8777c36821fe37ad5eeda955c}{set\_colname}}(std::vector<std::string>\ inputColName)\ \{\ colName\ =\ inputColName;\ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_aa4a8a6e93845988a96883397afa662d5}{set\_data}}(std::vector<std::vector<std::string>>\ inputData)\ \{\ data\ =\ inputData;\ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a084e5cdf95e6f3b9317bda91d157e701}{transpose}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Display\ functions}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_ac93bd51c4ea115a70d10db3ed8973450}{display\_index}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_afb9658c803a98f10d403a58d59f4aec1}{display\_colnames}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a12a70133ad10696c478978d48c6941ff}{display\_data}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a3d7f0da75c18235258a4b52cebecd7bd}{display\_dataframes}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ std::vector<std::string>\ index;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ std::vector<std::string>\ colName;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ data;}
+\DoxyCodeLine{00034\ \ \ \ \ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \mbox{\hyperlink{namespace_h_b_a54cae211b100cab43f28871d998a238e}{read\_csv}}(std::string,\ \textcolor{keywordtype}{int}\ colNameIndex\ =\ 0,\ \textcolor{keywordtype}{int}\ indexRow\ =\ 0);}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}

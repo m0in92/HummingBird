@@ -1,0 +1,9 @@
+Name,Value,Unit,Reference
+Density,1626,kg m^-3,Guo et al.
+Volume,3.38E-05,m^3,Guo et al.
+Specific Heat,750,J K^-1 kg^-1,Guo et al.
+Heat Transfer Coefficient,1,J s^-1 K^-1,Guo et al.
+Surface Area,0.085,m^2,Guo et al.
+Capacity,1.65,A hr,Guo et al.
+Maximum Potential Cut-off,4.2,V,Guo et al.
+Minimum Potential Cut-off,2.5,V,Guo et al.
